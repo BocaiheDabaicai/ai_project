@@ -1,0 +1,136 @@
+/* ========== 主题变量定义 ========== */
+:root,
+[data-theme="sky-blue"] {
+  --bg-sidebar: #e8f4fd;
+  --bg-sidebar-hover: #d6eaf8;
+  --bg-sidebar-active: #3498db;
+  --color-sidebar-text: #2c3e50;
+  --color-sidebar-text-active: #fff;
+  --color-accent: #3498db;
+  --color-accent-light: #ebf5fb;
+  --color-accent-hover: #2980b9;
+  --bg-page: #f0f4f8;
+  --bg-card: #ffffff;
+  --bg-header: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-muted: #bdc3c7;
+  --border-color: #e8ecf1;
+  --border-light: #f1f3f5;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --gradient-login: linear-gradient(135deg, #a8d8ea 0%, #74b9ff 50%, #a29bfe 100%);
+  --gradient-btn: linear-gradient(135deg, #74b9ff, #a29bfe);
+  --gradient-btn-hover: linear-gradient(135deg, #6ab0ec, #9289f2);
+}
+
+[data-theme="mint-green"] {
+  --bg-sidebar: #e8f8f0;
+  --bg-sidebar-hover: #d0f0dd;
+  --bg-sidebar-active: #1abc9c;
+  --color-sidebar-text: #2c3e50;
+  --color-sidebar-text-active: #fff;
+  --color-accent: #1abc9c;
+  --color-accent-light: #e8f8f0;
+  --color-accent-hover: #16a085;
+  --bg-page: #f0f7f4;
+  --bg-card: #ffffff;
+  --bg-header: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-muted: #bdc3c7;
+  --border-color: #dceee5;
+  --border-light: #f1f5f3;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --gradient-login: linear-gradient(135deg, #a8e6cf 0%, #1abc9c 50%, #55efc4 100%);
+  --gradient-btn: linear-gradient(135deg, #1abc9c, #55efc4);
+  --gradient-btn-hover: linear-gradient(135deg, #16a085, #44e8b3);
+}
+
+[data-theme="warm-orange"] {
+  --bg-sidebar: #fef5e7;
+  --bg-sidebar-hover: #fdebd0;
+  --bg-sidebar-active: #f39c12;
+  --color-sidebar-text: #2c3e50;
+  --color-sidebar-text-active: #fff;
+  --color-accent: #f39c12;
+  --color-accent-light: #fef5e7;
+  --color-accent-hover: #e67e22;
+  --bg-page: #fef9f3;
+  --bg-card: #ffffff;
+  --bg-header: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-muted: #bdc3c7;
+  --border-color: #fdebd0;
+  --border-light: #fef9f3;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --gradient-login: linear-gradient(135deg, #ffeaa7 0%, #f39c12 50%, #fd79a8 100%);
+  --gradient-btn: linear-gradient(135deg, #f39c12, #fd79a8);
+  --gradient-btn-hover: linear-gradient(135deg, #e67e22, #e9709c);
+}
+
+[data-theme="violet"] {
+  --bg-sidebar: #f3eefb;
+  --bg-sidebar-hover: #e8def8;
+  --bg-sidebar-active: #8e44ad;
+  --color-sidebar-text: #2c3e50;
+  --color-sidebar-text-active: #fff;
+  --color-accent: #8e44ad;
+  --color-accent-light: #f3eefb;
+  --color-accent-hover: #7d3c98;
+  --bg-page: #f7f4fa;
+  --bg-card: #ffffff;
+  --bg-header: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-muted: #bdc3c7;
+  --border-color: #e8def8;
+  --border-light: #f7f4fa;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --gradient-login: linear-gradient(135deg, #dcd6f7 0%, #8e44ad 50%, #a29bfe 100%);
+  --gradient-btn: linear-gradient(135deg, #8e44ad, #a29bfe);
+  --gradient-btn-hover: linear-gradient(135deg, #7d3c98, #9289f2);
+}
+
+[data-theme="minimal-white"] {
+  --bg-sidebar: #fafafa;
+  --bg-sidebar-hover: #f0f0f0;
+  --bg-sidebar-active: #636e72;
+  --color-sidebar-text: #2d3436;
+  --color-sidebar-text-active: #fff;
+  --color-accent: #636e72;
+  --color-accent-light: #f5f6fa;
+  --color-accent-hover: #2d3436;
+  --bg-page: #f5f6fa;
+  --bg-card: #ffffff;
+  --bg-header: #ffffff;
+  --text-primary: #2d3436;
+  --text-secondary: #636e72;
+  --text-muted: #b2bec3;
+  --border-color: #dfe6e9;
+  --border-light: #f1f2f6;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.04);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.06);
+  --radius: 8px;
+  --radius-sm: 4px;
+  --gradient-login: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 50%, #636e72 100%);
+  --gradient-btn: linear-gradient(135deg, #636e72, #b2bec3);
+  --gradient-btn-hover: linear-gradient(135deg, #2d3436, #a0adb0);
+}
