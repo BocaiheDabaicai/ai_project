@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use sqlx::FromRow;
 use utoipa::ToSchema;
 
 #[derive(Debug, Serialize, Deserialize, ToSchema)]
@@ -52,6 +53,29 @@ pub struct HealthResponse {
     pub timestamp: String,
 }
 
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
+pub struct RouteInfo {
+    pub method: String,
+    pub path: String,
+    pub description: String,
+}
+
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
+pub struct RoutesResponse {
+    pub routes: Vec<RouteInfo>,
+}
+
+#[derive(Debug, FromRow)]
+#[allow(dead_code)]
+pub struct DbUser {
+    pub id: i32,
+    pub username: String,
+    pub password_hash: String,
+    pub role: String,
+    pub avatar: String,
+}
+
 pub type ApiResponseHealth = ApiResponse<HealthResponse>;
 pub type ApiResponseLogin = ApiResponse<LoginResponse>;
+pub type ApiResponseRoutes = ApiResponse<RoutesResponse>;
 pub type ApiResponseEmpty = ApiResponse<()>;

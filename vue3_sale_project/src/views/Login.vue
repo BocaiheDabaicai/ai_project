@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { ElMessage } from 'element-plus'
 import { useAuthStore } from '../stores/auth'
 
 const router = useRouter()
@@ -24,7 +25,8 @@ async function handleLogin() {
     await authStore.login(form.value.username, form.value.password)
     const redirect = route.query.redirect || '/'
     router.push(redirect)
-  } catch {
+  } catch (e) {
+    ElMessage.error(e.message || '登录失败')
   } finally {
     loading.value = false
   }

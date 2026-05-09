@@ -1,1 +1,4 @@
 rust_sale_project/target/debug/
+.env
+rust_sale_project/target/release/.fingerprint/
+rust_sale_project/target/release/
