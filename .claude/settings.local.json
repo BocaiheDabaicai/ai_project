@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(export PGPASSWORD=123456)",
-      "Bash(\"C:/Program Files/PostgreSQL/18/bin/psql.exe\" -U postgres -h localhost -c \"CREATE USER root WITH PASSWORD '123456' SUPERUSER;\")"
+      "Bash(\"C:/Program Files/PostgreSQL/18/bin/psql.exe\" -U postgres -h localhost -c \"CREATE USER root WITH PASSWORD '123456' SUPERUSER;\")",
+      "Bash(npx vite *)"
     ]
   }
 }

@@ -10,9 +10,12 @@ const authStore = useAuthStore()
 const themeStore = useThemeStore()
 
 const menuItems = [
-  { path: '/purchase', name: 'PurchaseOrder', label: '采购订单管理', icon: 'Document' },
+  { path: '/procurement/dashboard', name: 'ProcurementDashboard', label: '采购工作台', icon: 'Monitor' },
+  { path: '/procurement/requisition', name: 'ProcurementRequisition', label: '请购单管理', icon: 'Tickets' },
+  { path: '/procurement/order-list', name: 'ProcurementOrderList', label: '采购订单管理', icon: 'Document' },
+  { path: '/procurement/settings', name: 'ProcurementSettings', label: '采购配置', icon: 'Setting' },
   { path: '/supplier', name: 'SupplierManage', label: '供应商管理', icon: 'OfficeBuilding' },
-  { path: '/inventory', name: 'InventoryManage', label: '库存管理', icon: 'Box' }
+  { path: '/inventory', name: 'InventoryManage', label: '库存管理', icon: 'Box' },
 ]
 
 const activeMenu = computed(() => route.path)
