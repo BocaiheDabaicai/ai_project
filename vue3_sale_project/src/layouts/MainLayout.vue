@@ -10,10 +10,12 @@ const authStore = useAuthStore()
 const themeStore = useThemeStore()
 
 const menuItems = [
-  { path: '/procurement/dashboard', name: 'ProcurementDashboard', label: '采购工作台', icon: 'Monitor' },
-  { path: '/procurement/requisition', name: 'ProcurementRequisition', label: '请购单管理', icon: 'Tickets' },
-  { path: '/procurement/order-list', name: 'ProcurementOrderList', label: '采购订单管理', icon: 'Document' },
-  { path: '/procurement/settings', name: 'ProcurementSettings', label: '采购配置', icon: 'Setting' },
+  { path: '/procurement', name: 'ProcurementDashboard', label: '采购管理', icon: 'Monitor' },
+  { path: '/procurement/carton/requisition', name: 'CartonRequisition', label: '纸箱采购', icon: 'Tickets' },
+  { path: '/procurement/office', name: 'OfficeSupplies', label: '办公用品采购', icon: 'Memo' },
+  { path: '/procurement/ranch', name: 'RanchMaterials', label: '牧场物料采购', icon: 'Apple' },
+  { path: '/procurement/cold-chain', name: 'ColdChain', label: '低温包装采购', icon: 'IceCream' },
+  { path: '/procurement/summary', name: 'ProcurementSummary', label: '采购汇总', icon: 'DataAnalysis' },
   { path: '/supplier', name: 'SupplierManage', label: '供应商管理', icon: 'OfficeBuilding' },
   { path: '/inventory', name: 'InventoryManage', label: '库存管理', icon: 'Box' },
 ]

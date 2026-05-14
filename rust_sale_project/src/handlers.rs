@@ -78,21 +78,19 @@ pub async fn login(pool: web::Data<PgPool>, body: web::Json<LoginRequest>) -> Ht
 )]
 pub async fn list_routes() -> HttpResponse {
     let routes = vec![
-        RouteInfo {
-            method: "GET".to_string(),
-            path: "/api/health".to_string(),
-            description: "健康检查".to_string(),
-        },
-        RouteInfo {
-            method: "POST".to_string(),
-            path: "/api/login".to_string(),
-            description: "用户登录".to_string(),
-        },
-        RouteInfo {
-            method: "GET".to_string(),
-            path: "/api/routes".to_string(),
-            description: "接口路径列表".to_string(),
-        },
+        RouteInfo { method: "GET".into(), path: "/api/health".into(), description: "健康检查".into() },
+        RouteInfo { method: "POST".into(), path: "/api/login".into(), description: "用户登录".into() },
+        RouteInfo { method: "GET".into(), path: "/api/routes".into(), description: "接口路径列表".into() },
+        RouteInfo { method: "GET".into(), path: "/api/carton/requisitions".into(), description: "请购单列表".into() },
+        RouteInfo { method: "GET".into(), path: "/api/carton/requisitions/:id".into(), description: "请购单详情".into() },
+        RouteInfo { method: "GET".into(), path: "/api/carton/quotes".into(), description: "供应商报价".into() },
+        RouteInfo { method: "GET".into(), path: "/api/carton/orders".into(), description: "采购订单列表".into() },
+        RouteInfo { method: "GET".into(), path: "/api/carton/orders/:id".into(), description: "采购订单详情".into() },
+        RouteInfo { method: "POST".into(), path: "/api/carton/orders/create".into(), description: "创建采购订单".into() },
+        RouteInfo { method: "POST".into(), path: "/api/carton/orders/approve".into(), description: "审批订单".into() },
+        RouteInfo { method: "POST".into(), path: "/api/carton/orders/ship".into(), description: "发货".into() },
+        RouteInfo { method: "GET".into(), path: "/api/carton/orders/:id/shipments".into(), description: "批次列表".into() },
+        RouteInfo { method: "POST".into(), path: "/api/carton/orders/settle".into(), description: "结算".into() },
     ];
     let resp = RoutesResponse { routes };
     HttpResponse::Ok().json(ApiResponse::success(resp))

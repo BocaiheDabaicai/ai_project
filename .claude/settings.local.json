@@ -3,7 +3,14 @@
     "allow": [
       "Bash(export PGPASSWORD=123456)",
       "Bash(\"C:/Program Files/PostgreSQL/18/bin/psql.exe\" -U postgres -h localhost -c \"CREATE USER root WITH PASSWORD '123456' SUPERUSER;\")",
-      "Bash(npx vite *)"
+      "Bash(npx vite *)",
+      "Bash(cargo build *)",
+      "Bash(cargo run *)",
+      "Bash(curl -s http://localhost:8080/api/health)",
+      "Bash(curl -s -X POST http://localhost:8080/api/login -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"123456\"}')",
+      "Bash(curl -s http://localhost:8080/api/carton/requisitions)",
+      "Bash(curl -s http://localhost:8080/api/carton/quotes)",
+      "Bash(curl -s http://localhost:8080/api/carton/orders)"
     ]
   }
 }

@@ -12,46 +12,66 @@ const routes = [
     path: '/',
     component: () => import('../layouts/MainLayout.vue'),
     meta: { requiresAuth: true },
-    redirect: '/procurement/dashboard',
+    redirect: '/procurement',
     children: [
-      // ===== 采购人员模块 =====
+      // ===== 采购模块总入口 =====
       {
-        path: 'procurement/dashboard',
+        path: 'procurement',
         name: 'ProcurementDashboard',
         component: () => import('../views/procurement/Dashboard.vue'),
-        meta: { title: '采购工作台' }
+        meta: { title: '采购管理' }
+      },
+      // ===== 纸箱采购 =====
+      {
+        path: 'procurement/carton/requisition',
+        name: 'CartonRequisition',
+        component: () => import('../views/procurement/carton/RequisitionList.vue'),
+        meta: { title: '纸箱请购单' }
       },
       {
-        path: 'procurement/requisition',
-        name: 'ProcurementRequisition',
-        component: () => import('../views/procurement/RequisitionList.vue'),
-        meta: { title: '请购单管理' }
+        path: 'procurement/carton/create-order/:reqId',
+        name: 'CartonCreateOrder',
+        component: () => import('../views/procurement/carton/CreateOrder.vue'),
+        meta: { title: '创建采购订单' }
       },
       {
-        path: 'procurement/order-list',
-        name: 'ProcurementOrderList',
-        component: () => import('../views/procurement/OrderList.vue'),
-        meta: { title: '采购订单管理' }
+        path: 'procurement/carton/order-list',
+        name: 'CartonOrderList',
+        component: () => import('../views/procurement/carton/OrderList.vue'),
+        meta: { title: '纸箱采购订单' }
       },
       {
-        path: 'procurement/order-detail/:id',
-        name: 'ProcurementOrderDetail',
-        component: () => import('../views/procurement/OrderDetail.vue'),
-        meta: { title: '采购订单详情' }
+        path: 'procurement/carton/order-detail/:id',
+        name: 'CartonOrderDetail',
+        component: () => import('../views/procurement/carton/OrderDetail.vue'),
+        meta: { title: '订单详情' }
+      },
+      // ===== 其他模块占位 =====
+      {
+        path: 'procurement/office',
+        name: 'OfficeSupplies',
+        component: () => import('../views/procurement/OfficeSupplies.vue'),
+        meta: { title: '办公用品采购' }
       },
       {
-        path: 'procurement/settings',
-        name: 'ProcurementSettings',
-        component: () => import('../views/procurement/Settings.vue'),
-        meta: { title: '采购配置' }
+        path: 'procurement/ranch',
+        name: 'RanchMaterials',
+        component: () => import('../views/procurement/RanchMaterials.vue'),
+        meta: { title: '牧场物料采购' }
       },
-      // ===== 原始页面（保留） =====
       {
-        path: 'purchase',
-        name: 'PurchaseOrder',
-        component: () => import('../views/purchase/PurchaseOrder.vue'),
-        meta: { title: '采购订单管理(旧)' }
+        path: 'procurement/cold-chain',
+        name: 'ColdChain',
+        component: () => import('../views/procurement/ColdChain.vue'),
+        meta: { title: '低温包装采购' }
       },
+      {
+        path: 'procurement/summary',
+        name: 'ProcurementSummary',
+        component: () => import('../views/procurement/Summary.vue'),
+        meta: { title: '采购汇总' }
+      },
+      // ===== 保留 =====
       {
         path: 'supplier',
         name: 'SupplierManage',

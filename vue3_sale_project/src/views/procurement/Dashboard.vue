@@ -1,184 +1,253 @@
-<script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const stats = ref([
-  { label: '待处理请购单', value: 8, color: '#e6a23c', icon: 'Tickets' },
-  { label: '进行中订单', value: 12, color: '#3498db', icon: 'Document' },
-  { label: '今日已处理', value: 5, color: '#67c23a', icon: 'CircleCheck' },
-  { label: '待比价物料', value: 3, color: '#f56c6c', icon: 'Warning' },
-])
-
-const activities = ref([
-  { id: 1, text: '请购单 REQ20260510008 已推送至采购部', time: '10分钟前', type: 'warning' },
-  { id: 2, text: '采购订单 PO20260509007 供应商已发货', time: '1小时前', type: 'success' },
-  { id: 3, text: '请购单 REQ20260509006 比价完成，待分配数量', time: '2小时前', type: '' },
-  { id: 4, text: '采购订单 PO20260508005 已签收', time: '5小时前', type: 'success' },
-  { id: 5, text: '物料缺价提醒：不锈钢板材 304/2mm 缺少供应商报价', time: '6小时前', type: 'danger' },
-])
-
-function go(path) {
-  router.push(path)
-}
-</script>
-
 <template>
-  <div class="dashboard">
-    <h2 class="page-title">
-      <el-icon :size="20" color="var(--color-accent)"><Monitor /></el-icon>
-      采购工作台
-    </h2>
-
-    <!-- 统计卡片 -->
-    <div class="stats-row">
-      <div
-        v-for="s in stats"
-        :key="s.label"
-        class="stat-card"
-        @click="s.label === '待处理请购单' ? go('/procurement/requisition') : s.label === '进行中订单' ? go('/procurement/order-list') : undefined"
-        :style="{ cursor: s.label === '待处理请购单' || s.label === '进行中订单' ? 'pointer' : 'default' }"
-      >
-        <div class="stat-value" :style="{ color: s.color }">{{ s.value }}</div>
-        <div class="stat-label">{{ s.label }}</div>
+  <div class="page-container">
+    <div class="dashboard">
+      <div class="page-header">
+        <h1 class="page-title">采购管理</h1>
+        <p class="page-subtitle">采购模块工作台，请选择以下功能模块进入</p>
       </div>
-    </div>
 
-    <!-- 快捷入口 -->
-    <div class="section">
-      <h3 class="section-title">快捷操作</h3>
-      <div class="quick-actions">
-        <div class="action-card" @click="go('/procurement/requisition')">
-          <el-icon :size="32" color="#e6a23c"><Tickets /></el-icon>
-          <span>请购单管理</span>
-          <small>查看并处理请购单</small>
-        </div>
-        <div class="action-card" @click="go('/procurement/order-list')">
-          <el-icon :size="32" color="#3498db"><Document /></el-icon>
-          <span>采购订单</span>
-          <small>管理所有采购订单</small>
-        </div>
-        <div class="action-card" @click="go('/procurement/settings')">
-          <el-icon :size="32" color="#8e44ad"><Setting /></el-icon>
-          <span>采购配置</span>
-          <small>物料类型与标包设置</small>
-        </div>
-      </div>
-    </div>
-
-    <!-- 动态 + 待办 -->
-    <div class="bottom-row">
-      <div class="section" style="flex:2">
-        <h3 class="section-title">最近动态</h3>
-        <div class="activity-list">
-          <div
-            v-for="act in activities"
-            :key="act.id"
-            class="activity-item"
+      <!-- Stats Row -->
+      <el-row :gutter="16" class="stats-row">
+        <el-col :span="6" v-for="stat in stats" :key="stat.label">
+          <el-card
+            shadow="hover"
+            class="stat-card"
+            :style="{ borderLeft: `4px solid ${stat.color}` }"
           >
-            <span class="activity-dot" :style="{ background: `var(--el-color-${act.type || 'info'})` }"></span>
-            <span class="activity-text">{{ act.text }}</span>
-            <span class="activity-time">{{ act.time }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="section" style="flex:1">
-        <h3 class="section-title">待办提醒</h3>
-        <div class="todo-list">
-          <div class="todo-item"><el-icon color="#e6a23c"><Warning /></el-icon> 3 个请购单等待比价</div>
-          <div class="todo-item"><el-icon color="#e6a23c"><Warning /></el-icon> 2 个订单待分配数量</div>
-          <div class="todo-item"><el-icon color="#3498db"><InfoFilled /></el-icon> 5 个物料需要补价</div>
-          <div class="todo-item"><el-icon color="#67c23a"><CircleCheck /></el-icon> 今日已处理 5 单</div>
-        </div>
-      </div>
+            <div class="stat-content">
+              <div class="stat-value" :style="{ color: stat.color }">
+                {{ stat.value }}
+              </div>
+              <div class="stat-label">{{ stat.label }}</div>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+
+      <!-- Module Cards -->
+      <el-row :gutter="20" class="modules-row">
+        <el-col
+          :xs="24"
+          :sm="12"
+          :md="8"
+          :lg="6"
+          v-for="module in modules"
+          :key="module.title"
+        >
+          <el-card
+            shadow="never"
+            class="module-card"
+            @click="navigateTo(module.route)"
+          >
+            <div class="module-card-inner">
+              <div
+                class="module-icon-wrapper"
+                :style="{ backgroundColor: module.color + '18' }"
+              >
+                <el-icon
+                  :size="48"
+                  class="module-icon"
+                  :style="{ color: module.color }"
+                >
+                  <component :is="module.icon" />
+                </el-icon>
+              </div>
+              <h3 class="module-title">{{ module.title }}</h3>
+              <p class="module-subtitle">{{ module.subtitle }}</p>
+              <el-button
+                type="primary"
+                :style="{ backgroundColor: module.color, borderColor: module.color }"
+                round
+                class="module-btn"
+                size="small"
+              >
+                进入系统 &rarr;
+              </el-button>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
 
+<script setup>
+import { useRouter } from 'vue-router'
+import {
+  Tickets,
+  Memo,
+  Apple,
+  IceCream,
+  DataAnalysis,
+} from '@element-plus/icons-vue'
+
+const router = useRouter()
+
+const stats = [
+  { label: '待处理请购单', value: 5, color: '#e6a23c' },
+  { label: '进行中订单', value: 8, color: '#409eff' },
+  { label: '已完成订单', value: 23, color: '#67c23a' },
+  { label: '待结算', value: 3, color: '#f56c6c' },
+]
+
+const modules = [
+  {
+    title: '纸箱采购',
+    subtitle: '纸箱及包装材料请购与订单管理',
+    icon: Tickets,
+    color: '#e6a23c',
+    route: '/procurement/carton/requisition',
+  },
+  {
+    title: '办公用品采购',
+    subtitle: '办公用品、耗材请购与审批',
+    icon: Memo,
+    color: '#3498db',
+    route: '/procurement/office',
+  },
+  {
+    title: '牧场物料采购',
+    subtitle: '牧场生产物料采购与配送管理',
+    icon: Apple,
+    color: '#67c23a',
+    route: '/procurement/ranch',
+  },
+  {
+    title: '低温包装采购',
+    subtitle: '低温冷链包装材料采购管理',
+    icon: IceCream,
+    color: '#8e44ad',
+    route: '/procurement/cold-chain',
+  },
+  {
+    title: '采购汇总',
+    subtitle: '采购数据统计与分析报表',
+    icon: DataAnalysis,
+    color: '#f56c6c',
+    route: '/procurement/summary',
+  },
+]
+
+function navigateTo(route) {
+  router.push(route)
+}
+</script>
+
 <style scoped>
 .dashboard {
   max-width: 1200px;
+  margin: 0 auto;
 }
-.section {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
+
+.page-header {
+  margin-bottom: 28px;
 }
-.section-title {
-  font-size: 15px;
+
+.page-title {
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--text-primary);
+  color: #303133;
+  margin: 0 0 8px 0;
 }
-.quick-actions {
-  display: flex;
-  gap: 16px;
-}
-.action-card {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 28px 20px;
-  background: var(--bg-page);
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: all .2s;
-  text-align: center;
-}
-.action-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-.action-card span {
+
+.page-subtitle {
   font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
+  color: #909399;
+  margin: 0;
 }
-.action-card small {
-  font-size: 12px;
-  color: var(--text-secondary);
+
+/* Stats Row */
+.stats-row {
+  margin-bottom: 32px;
 }
-.bottom-row {
-  display: flex;
-  gap: 16px;
+
+.stat-card {
+  border-radius: 8px;
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: default;
 }
-.activity-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border-light);
+
+.stat-card:hover {
+  transform: translateY(-2px);
 }
-.activity-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.activity-text {
-  flex: 1;
-  font-size: 13px;
-  color: var(--text-primary);
-}
-.activity-time {
-  font-size: 11px;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-.todo-list {
+
+.stat-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
 }
-.todo-item {
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #606266;
+  margin-top: 6px;
+}
+
+/* Module Cards */
+.modules-row {
+  row-gap: 20px;
+}
+
+.module-card {
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  border: 1px solid #ebeef5;
+}
+
+.module-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.module-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28px 16px 20px;
+  min-height: 220px;
+  justify-content: space-between;
+}
+
+.module-icon-wrapper {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.module-icon {
+  flex-shrink: 0;
+}
+
+.module-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #303133;
+  margin: 0 0 6px 0;
+}
+
+.module-subtitle {
   font-size: 13px;
-  color: var(--text-primary);
+  color: #909399;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+.module-btn {
+  flex-shrink: 0;
 }
 </style>
